@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'jlg-prime'
-include('lib')
+include('jlg-prime')

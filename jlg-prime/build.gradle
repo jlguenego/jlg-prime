@@ -26,3 +26,20 @@ dependencies {
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:30.1-jre'
 }
+
+
+version = '0.0.1-SNAPSHOT'
+group = 'io.github.jlguenego'
+
+
+tasks.named('jar') {
+    manifest {
+        attributes('Implementation-Title': project.name,
+                   'Implementation-Version': project.version)
+    }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
