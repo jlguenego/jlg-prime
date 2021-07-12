@@ -115,6 +115,7 @@ tasks.register('jlg') {
         println "Coucou jlg!!!"
         println "user.dir=" + System.getProperty("user.dir")
         println "jlg.message=" + System.getProperty("jlg.message")
+        println "jlg.otherMessage=" + project.property('otherMessage')
     }
 }
 
