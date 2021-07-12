@@ -113,10 +113,8 @@ tasks.register('jlg') {
     description 'Print a message to JLG.'
     doLast {
         println "Coucou jlg!!!"
-        int x = 2
-        if (x > 1) {
-            println "x superior to 1"
-        }
+        println "user.dir=" + System.getProperty("user.dir")
+        println "jlg.message=" + System.getProperty("jlg.message")
     }
 }
 
