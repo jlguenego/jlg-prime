@@ -9,6 +9,8 @@
 plugins {
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
+    id 'signing'
+    id 'maven-publish'
 }
 
 repositories {
@@ -28,14 +30,14 @@ dependencies {
 }
 
 
-version = '0.0.1-SNAPSHOT'
 group = 'io.github.jlguenego'
+version = '0.0.1-SNAPSHOT'
 
 
 tasks.named('jar') {
     manifest {
         attributes('Implementation-Title': project.name,
-                   'Implementation-Version': project.version)
+                'Implementation-Version': project.version)
     }
 }
 
@@ -43,3 +45,80 @@ java {
     withSourcesJar()
     withJavadocJar()
 }
+
+artifacts {
+    archives jar
+    archives sourcesJar
+    archives javadocJar
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = 'jlg-prime'
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = 'JLG Prime'
+                description = 'Toolset for prime numbers'
+                url = 'https://github.com/jlguenego/jlg-prime'
+                properties = [:
+                              // myProp: "value",
+                              // "prop.with.dots": "anotherValue"
+                ]
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'https://github.com/jlguenego/jlg-prime/blob/master/LICENSE.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'jlguenego'
+                        name = 'Jean-Louis GUENEGO'
+                        email = 'jlguenego@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/jlguenego/jlg-prime.git'
+                    developerConnection = 'scm:git:https://github.com/jlguenego/jlg-prime.git'
+                    url = 'https://github.com/jlguenego/jlg-prime'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            // change URLs to point to your repos, e.g. http://my.org/repo
+            def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
+            def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}
+
+tasks.register('jlg') {
+    group 'Documentation'
+    description 'Print a message to JLG.'
+    doLast {
+        println "Coucou jlg!!!"
+        int x = 2
+        if (x > 1) {
+            println "x superior to 1"
+        }
+    }
+}
+
+
+
