@@ -31,8 +31,7 @@ dependencies {
 
 
 group = 'io.github.jlguenego'
-version = '0.0.1-SNAPSHOT'
-
+version = '0.0.1'
 
 tasks.named('jar') {
     manifest {
@@ -66,7 +65,7 @@ publishing {
                 }
             }
             pom {
-                name = 'JLG Prime'
+                name = "${project.group}:${project.name}"
                 description = 'Toolset for prime numbers'
                 url = 'https://github.com/jlguenego/jlg-prime'
                 properties = [:
@@ -84,6 +83,7 @@ publishing {
                         id = 'jlguenego'
                         name = 'Jean-Louis GUENEGO'
                         email = 'jlguenego@gmail.com'
+                        organizationUrl = 'https://github.com/jlguenego'
                     }
                 }
                 scm {
@@ -119,6 +119,7 @@ tasks.register('jlg') {
         println "jlg.otherMessage=" + project.property('otherMessage')
         println "org.gradle.project.toto=" + project.property('org.gradle.project.toto')
         println "layout=" + layout.getProjectDirectory()
+        println "ossrhUsername=" + ossrhUsername
     }
 }
 
