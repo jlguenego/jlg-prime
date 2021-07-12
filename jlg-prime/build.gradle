@@ -96,6 +96,7 @@ publishing {
     }
     repositories {
         maven {
+            name = "Maven"
             // change URLs to point to your repos, e.g. http://my.org/repo
             def releasesRepoUrl = layout.buildDirectory.dir('repos/releases')
             def snapshotsRepoUrl = layout.buildDirectory.dir('repos/snapshots')
@@ -116,7 +117,8 @@ tasks.register('jlg') {
         println "user.dir=" + System.getProperty("user.dir")
         println "jlg.message=" + System.getProperty("jlg.message")
         println "jlg.otherMessage=" + project.property('otherMessage')
-        println "jlg.otherMessage=" + project.property('org.gradle.project.toto')
+        println "org.gradle.project.toto=" + project.property('org.gradle.project.toto')
+        println "layout=" + layout.getProjectDirectory()
     }
 }
 
