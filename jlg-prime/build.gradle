@@ -116,6 +116,7 @@ tasks.register('jlg') {
         println "user.dir=" + System.getProperty("user.dir")
         println "jlg.message=" + System.getProperty("jlg.message")
         println "jlg.otherMessage=" + project.property('otherMessage')
+        println "jlg.otherMessage=" + project.property('org.gradle.project.toto')
     }
 }
 
