@@ -32,7 +32,7 @@ dependencies {
 
 group = 'io.github.jlguenego'
 // version = '0.0.1-SNAPSHOT'
-version = '0.0.1'
+version = '0.0.2'
 
 tasks.named('jar') {
     manifest {
